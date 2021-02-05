@@ -1,5 +1,7 @@
 package domain
 
+import errs "github.com/MohamedNazir/SimpleBank/errors"
+
 // Customer Exported
 type Customer struct {
 	ID          int
@@ -12,5 +14,6 @@ type Customer struct {
 
 //CustomerRepository Exported
 type CustomerRepository interface {
-	FindAll() ([]Customer, error)
+	FindAll() ([]Customer, *errs.AppError)
+	FindByID(int) (*Customer, *errs.AppError)
 }

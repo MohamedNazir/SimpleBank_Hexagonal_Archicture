@@ -16,5 +16,6 @@ func mapUrls() {
 
 	router.GET("/greet", controller.Greet)
 	router.GET("/customers", ch.GetAllCustomers)
+	router.GET("/customers/:customerID", ch.GetCustomer)
 
 }
