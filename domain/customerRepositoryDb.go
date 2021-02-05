@@ -24,30 +24,12 @@ const (
 func (db CustomerRepositoryDb) FindAll() ([]Customer, *errs.AppError) {
 
 	customers := make([]Customer, 0)
-	//	rows, err := db.client.Query(queryFindAll)
 	err := db.client.Select(&customers, queryFindAll)
 
 	if err != nil {
 		logger.Error("Error while querying customer table " + err.Error())
 		return nil, errs.NewUnexpectedSystemError("Unexpected System error")
 	}
-
-	// err = sqlx.StructScan(rows, &customers)
-	// if err != nil {
-	// 	logger.Error("Error while scanning customers " + err.Error())
-	// 	return nil, errs.NewUnexpectedSystemError("Unexpected System error")
-	// }
-
-	// for rows.Next() {
-	// 	var c Customer
-	// 	err := rows.Scan(&c.ID, &c.Name, &c.City, &c.Zipcode, &c.DateOfBirth, &c.Status)
-	// 	if err != nil {
-	// 		logger.Error("Error while scanning customers " + err.Error())
-	// 		return nil, errs.NewUnexpectedSystemError("Unexpected System error")
-	// 	}
-
-	// 	customers = append(customers, c)
-	// }
 
 	return customers, nil
 }
@@ -66,12 +48,7 @@ func (db CustomerRepositoryDb) FindByID(id int) (*Customer, *errs.AppError) {
 		}
 
 	}
-
-	//row := db.client.QueryRow(queryFindByID, id)
-	//err := row.Scan(&c.ID, &c.Name, &c.City, &c.Zipcode, &c.DateOfBirth, &c.Status)
-
 	return &c, nil
-
 }
 
 //NewCustomerRepositoryDb exported
