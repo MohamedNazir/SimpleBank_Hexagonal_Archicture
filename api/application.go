@@ -6,7 +6,8 @@ var (
 	router = gin.Default()
 )
 
+//StartApplication to start the application
 func StartApplication() {
 	mapUrls()
-	router.Run(":8080")
+	router.Run(":9999")
 }
