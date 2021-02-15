@@ -14,8 +14,6 @@ func mapUrls() {
 
 	// wiring
 	//cc := controller.CustomerController{Service: service.CustomerService(domain.NewCustomerRepositoryStub())}
-	//	cc := controller.CustomerController{Service: service.NewDefaultCustomerService(domain.NewCustomerRepositoryDb())}
-	// ch := CustomerHandlers{service.NewCustomerService(domain.NewCustomerRepositoryStub())}
 	dbClient := getDbClient()
 	CustomerRepositoryDb := domain.NewCustomerRepositoryDb(dbClient)
 	CustomerService := service.NewCustomerService(CustomerRepositoryDb)
@@ -23,8 +21,8 @@ func mapUrls() {
 	AccountRepositoryDb := domain.NewAccountRepositoryDb(dbClient)
 	AccountService := service.NewAccountService(AccountRepositoryDb)
 
-	cc := controller.CustomerController{CustomerService}
-	ac := controller.AccountController{AccountService}
+	cc := controller.CustomerController{Service: CustomerService}
+	ac := controller.AccountController{Service: AccountService}
 
 	router.GET("/greet", controller.Greet)
 	router.GET("/customers", cc.GetAllCustomers)
